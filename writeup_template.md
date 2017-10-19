@@ -1,8 +1,6 @@
 # **Finding Lane Lines on the Road** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
+## Writeup
 
 ---
 
@@ -23,25 +21,25 @@ The goals / steps of this project are the following:
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+My pipeline consisted of 4 steps. 
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+Firstly, I converted the image to grayscale. I then ran canny on the grayscale image to 
+produce edge-detected image. I followed this by running a hough transform on the canny
+ouput to detect lines which followed the strongest gradient. And, lastly, I applied an 
+image mask to focus only on the region of the image I was interested in.
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
-![alt text][image1]
+Regarding the draw_lines() function - I initially tried using the cv2.fitline() function
+to find the parameters for the best fit line - which worked. However extrapolating did not
+work [I'm still looking into this]. To draw a thicker outline, however, I ended up increasing
+the thickness of the lines in the original function.
 
 
 ### 2. Identify potential shortcomings with your current pipeline
 
 
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
+The main shortcoming in my current pipeline is the flawed extrapolation. 
 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
-
-Another potential improvement could be to ...
+A possible (and currently being researched) improvement - is implementing a better method for calculating the ends of the currently drawn lines.
